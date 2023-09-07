@@ -65,10 +65,6 @@ public class CadastrarCliente {
     public String getSenha() {
         return senha;
     }
-    
-//    public void setSenha(String senha){
-//        this.senha = senha;
-//    }
 
     public void setSenha(String senha) {
         // Gere um hash BCrypt a partir da senha fornecida
