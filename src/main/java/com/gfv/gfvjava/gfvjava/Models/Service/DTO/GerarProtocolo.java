@@ -1,4 +1,4 @@
-package gfvjava.Models.Service.DTO;
+package com.gfv.gfvjava.gfvjava.Models.Service.DTO;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ public class GerarProtocolo {
 	
 	private String idProtocolo;
 	private Date dataAcionamento;
-	private ArrayList<CadastrarCliente> itensProtocolo;
+	//private ArrayList<CadastrarCliente> itensProtocolo;
 	
 	public GerarProtocolo() {
 		
@@ -16,7 +16,7 @@ public class GerarProtocolo {
 	public GerarProtocolo(String idProtocolo, Date dataAcionamento, ArrayList<CadastrarCliente> itensProtocolo) {
 		this.idProtocolo = idProtocolo;
 		this.dataAcionamento = dataAcionamento;
-		this.itensProtocolo = itensProtocolo;
+		//this.itensProtocolo = itensProtocolo;
 	}
 
 	public String getIdProtocolo() {
@@ -35,13 +35,13 @@ public class GerarProtocolo {
 		this.dataAcionamento = dataAcionamento;
 	}
 
-	public ArrayList<CadastrarCliente> getItensProtocolo() {
-		return itensProtocolo;
-	}
-
-	public void setItensProtocolo(ArrayList<CadastrarCliente> itensProtocolo) {
-		this.itensProtocolo = itensProtocolo;
-	}
+//	public ArrayList<CadastrarCliente> getItensProtocolo() {
+//		return itensProtocolo;
+//	}
+//
+//	public void setItensProtocolo(ArrayList<CadastrarCliente> itensProtocolo) {
+//		this.itensProtocolo = itensProtocolo;
+//	}
 	
 	
 	

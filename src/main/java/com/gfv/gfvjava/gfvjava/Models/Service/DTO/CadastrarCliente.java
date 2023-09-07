@@ -10,7 +10,7 @@ public class CadastrarCliente {
     private String email;
     private String senha;
 
-    public CadastrarCliente() {}
+    public CadastrarCliente(String nome1, String cpf1, String cnh1, String email1, String senha1) {}
 
     public CadastrarCliente(int idCliente, String nome, String cpf, String cnh, String email, String senha) {
         this.idCliente = idCliente;
@@ -18,6 +18,7 @@ public class CadastrarCliente {
         this.cpf = cpf;
         this.cnh = cnh;
         this.email = email;
+        this.senha = senha;
         setSenha(senha);
     }
 
@@ -64,6 +65,10 @@ public class CadastrarCliente {
     public String getSenha() {
         return senha;
     }
+    
+//    public void setSenha(String senha){
+//        this.senha = senha;
+//    }
 
     public void setSenha(String senha) {
         // Gere um hash BCrypt a partir da senha fornecida

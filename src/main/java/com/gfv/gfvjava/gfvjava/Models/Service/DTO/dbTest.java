@@ -1,4 +1,4 @@
-package gfvjava.Models.Service.DTO;
+package com.gfv.gfvjava.gfvjava.Models.Service.DTO;
 
 public class dbTest {
     private int id;
