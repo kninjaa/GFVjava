@@ -3,51 +3,59 @@ package com.gfv.gfvjava.gfvjava.Models.Service.DTO;
 import com.gfv.gfvjava.gfvjava.Models.Service.DTO.CadastrarCliente;
 
 public class SolicitarCarroCliente extends CadastrarCliente{
-	
-    private String placaCarro;
-    private float tamanhoCarro;
-    private float pesoCarro;
-    private int qtdeRodas;
-
-    public SolicitarCarroCliente(int idCliente, String cpf, String cnh, String email, String senha, String placaCarro, float tamanhoCarro, float pesoCarro, int qtdeRodas) {
+    
+    private int idVeiculo;	
+    private int tipoVeiculoFK; //se possui carga
+      
+    private boolean Customizado;
+    private boolean Blindado;
+    
+    private String placaVeiculo;
+    private float tamanhoVeiculo;
+    private float pesoVeiculo;
+    private int qtdeEixos;
+    
+    private int idCliente;
+    
+    public SolicitarCarroCliente(int idCliente, String cpf, String cnh, String email, String senha, String placaVeiculo, float tamanhoVeiculo, float pesoVeiculo, int qtdeEixos) {
         super(idCliente, null, cpf, cnh, email, senha); 
-        this.placaCarro = placaCarro;
-        this.tamanhoCarro = tamanhoCarro;
-        this.pesoCarro = pesoCarro;
-        this.qtdeRodas = qtdeRodas;
+        this.placaVeiculo = placaVeiculo;
+        this.tamanhoVeiculo = tamanhoVeiculo;
+        this.pesoVeiculo = pesoVeiculo;
+        this.qtdeEixos = qtdeEixos;
     }
 
     public String getPlacaCarro() {
-        return placaCarro;
+        return placaVeiculo;
     }
 
-    public void setPlacaCarro(String placaCarro) {
-        this.placaCarro = placaCarro;
+    public void setPlacaCarro(String placaVeiculo) {
+        this.placaVeiculo = placaVeiculo;
     }
 
 
     public float getTamanhoCarro() {
-        return tamanhoCarro;
+        return tamanhoVeiculo;
     }
 
-    public void setTamanhoCarro(float tamanhoCarro) {
-        this.tamanhoCarro = tamanhoCarro;
+    public void setTamanhoCarro(float tamanhoVeiculo) {
+        this.tamanhoVeiculo = tamanhoVeiculo;
     }
 
     public float getPesoCarro() {
-        return pesoCarro;
+        return pesoVeiculo;
     }
 
-    public void setPesoCarro(float pesoCarro) {
-        this.pesoCarro = pesoCarro;
+    public void setPesoCarro(float pesoVeiculo) {
+        this.pesoVeiculo = pesoVeiculo;
     }
 
     public int getQtdeRodas() {
-        return qtdeRodas;
+        return qtdeEixos;
     }
 
-    public void setQtdeRodas(int qtdeRodas) {
-        this.qtdeRodas = qtdeRodas;
+    public void setQtdeRodas(int qtdeEixos) {
+        this.qtdeEixos = qtdeEixos;
     }
 
     @Override

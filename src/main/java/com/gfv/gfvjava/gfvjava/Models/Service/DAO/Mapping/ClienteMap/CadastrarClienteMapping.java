@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import org.mindrot.jbcrypt.BCrypt;
 
-
 import com.gfv.gfvjava.gfvjava.Models.Service.DAO.ConnectionDB;
 import com.gfv.gfvjava.gfvjava.Models.Service.DTO.CadastrarCliente;
 
@@ -26,7 +25,6 @@ public class CadastrarClienteMapping {
             ResultSet resultSet = statement.executeQuery("SELECT table_name FROM all_tables WHERE table_name = 'TBCLIENTE'");
 
             if (!resultSet.next()) {
-                // A tabela não existe, então vamos criá-la
                 String createTableSQL = "CREATE TABLE tbCliente (ct_int_id NUMBER PRIMARY KEY, ct_str_name VARCHAR2(255) NOT NULL, ct_str_cpf VARCHAR(12) NOT NULL, ct_str_cnh VARCHAR(12) NOT NULL, ct_str_email VARCHAR2(255) NOT NULL, ct_str_senha VARCHAR2(255) NOT NULL)";
                 statement.executeUpdate(createTableSQL);
                 String createSequenceSQL = "CREATE SEQUENCE Clientesqc START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE";

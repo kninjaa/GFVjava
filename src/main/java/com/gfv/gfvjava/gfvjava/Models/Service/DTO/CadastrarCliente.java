@@ -9,6 +9,7 @@ public class CadastrarCliente {
     private String cnh;
     private String email;
     private String senha;
+    //id do veiculo 
 
     public CadastrarCliente(String nome1, String cpf1, String cnh1, String email1, String senha1) {}
 
