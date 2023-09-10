@@ -1,59 +1,46 @@
 package com.gfv.gfvjava.gfvjava.Models.Service.DAO.Mapping.ClienteMap;
 
 import java.sql.*;
-import org.mindrot.jbcrypt.BCrypt;
-
-
 import com.gfv.gfvjava.gfvjava.Models.Service.DAO.ConnectionDB;
+import com.gfv.gfvjava.gfvjava.Models.Service.DTO.SolicitarCarroCliente;
+import com.gfv.gfvjava.gfvjava.Models.Service.DTO.Enum.Evalidacao;
 
 public class VeiculoClienteMapping {
     private final Connection connection;
 
     public VeiculoClienteMapping() {
         this.connection = new ConnectionDB().getConnection();
-        createTable();
     }
-    
-    public void createTable() {
+
+    public void inserirDadosVeiculo(String marca, String modelo, String placaVeiculo, String customizado, String blindado, String carga, String tamanhoVeiculo, double pesoVeiculo, int qtdeEixos) {
         try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT table_name FROM all_tables WHERE table_name = 'TBVEICULO'");
+            String insertSQL = "INSERT INTO TBVEICULO_GFVCG " +
+                    "(vc_str_mrc_gfvCG, vc_str_mdl_gfvCG, vc_str_pcv_gfvCG, vc_bool_ctz_gfvCG, " +
+                    "vc_bool_blg_gfvCG, vc_bool_cg_gfvCG, vc_str_tmnv_gfvCG, vc_int_ps_gfvCG, vc_int_qtdeix_gfvCG) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            if (!resultSet.next()) {
-                String createTableSQL = "CREATE TABLE tbVeiculo (vc_int_id NUMBER PRIMARY KEY, ct_str_name VARCHAR2(255) NOT NULL, ct_str_cpf VARCHAR(12) NOT NULL, ct_str_cnh VARCHAR(12) NOT NULL, ct_str_email VARCHAR2(255) NOT NULL, ct_str_senha VARCHAR2(255) NOT NULL)";
-                statement.executeUpdate(createTableSQL);
-                String createSequenceSQL = "CREATE SEQUENCE Clientesqc START WITH 1 INCREMENT BY 1 NOCACHE NOCYCLE";
-                statement.executeUpdate(createSequenceSQL);
-                String alterTableSQL = "ALTER TABLE tbVeiculo MODIFY ct_int_id NUMBER DEFAULT Clientesqc.nextval";
-                statement.executeUpdate(alterTableSQL);
-            }
+            SolicitarCarroCliente solicitarCarroCliente = new SolicitarCarroCliente(marca, modelo, placaVeiculo, customizado, blindado, carga, tamanhoVeiculo, pesoVeiculo, qtdeEixos);
 
-            resultSet.close();
-            statement.close();
+            PreparedStatement preparedStatement = connection.prepareStatement(insertSQL);
+            preparedStatement.setString(1, solicitarCarroCliente.getMarca());
+            preparedStatement.setString(2, solicitarCarroCliente.getModelo());
+            preparedStatement.setString(3, solicitarCarroCliente.getPlacaVeiculo());
+            preparedStatement.setString(4, solicitarCarroCliente.getCustomizado());
+            preparedStatement.setString(5, solicitarCarroCliente.getBlindado());
+            preparedStatement.setString(6, solicitarCarroCliente.getCarga());
+            preparedStatement.setString(7, solicitarCarroCliente.getTamanhoVeiculo());
+            preparedStatement.setDouble(8, solicitarCarroCliente.getPesoVeiculo());
+            preparedStatement.setInt(9, solicitarCarroCliente.getQtdeEixos());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
-//    public void inserirCliente(String nome, String cpf, String cnh, String email, String senha) {
-//        try {
-//            String insertSQL = "INSERT INTO tbVeiculo (ct_str_name, ct_str_cpf, ct_str_cnh, ct_str_email, ct_str_senha) VALUES (?, ?, ?, ?, ?)";
-//
-//            // Preparar a senha usando BCrypt
-//            String senhaHash = BCrypt.hashpw(senha, BCrypt.gensalt());
-//
-//            PreparedStatement preparedStatement = connection.prepareStatement(insertSQL);
-//            preparedStatement.setString(1, nome);
-//            preparedStatement.setString(2, cpf);
-//            preparedStatement.setString(3, cnh);
-//            preparedStatement.setString(4, email);
-//            preparedStatement.setString(5, senhaHash);
-//
-//            preparedStatement.executeUpdate();
-//            preparedStatement.close();
-//            System.out.println("coluna recarregada.");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public String mapearValidacaoEnumParaString(Evalidacao validacao) {
+        return validacao.getValidacao();
+    }
 }

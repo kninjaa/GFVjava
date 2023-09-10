@@ -1,7 +1,10 @@
 package com.gfv.gfvjava.gfvjava.UserInterface.views;
 
 import com.gfv.gfvjava.gfvjava.Models.Service.DAO.Mapping.ClienteMap.CadastrarClienteMapping;
+import com.gfv.gfvjava.gfvjava.Models.Service.DAO.VerificaTable;
 import com.gfv.gfvjava.gfvjava.Models.Service.DTO.CadastrarCliente;
+import com.gfv.gfvjava.gfvjava.Models.Service.ServiceLayer.CClienteSL;
+
 import javax.swing.JOptionPane;
 
 public class JFcadastroCliente extends javax.swing.JFrame {
@@ -13,6 +16,10 @@ public class JFcadastroCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setTitle("GFV Corporation");
+
+        jFrame1 = new javax.swing.JFrame();
+        jFrame2 = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         ClienteField = new javax.swing.JTextField();
         CPField = new javax.swing.JTextField();
@@ -25,6 +32,28 @@ public class JFcadastroCliente extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
+        jFrame2.getContentPane().setLayout(jFrame2Layout);
+        jFrame2Layout.setHorizontalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame2Layout.setVerticalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,7 +79,7 @@ public class JFcadastroCliente extends javax.swing.JFrame {
 
         jLabel6.setText("Senha:");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Próximo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -86,7 +115,7 @@ public class JFcadastroCliente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jButton1)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +147,7 @@ public class JFcadastroCliente extends javax.swing.JFrame {
                 .addComponent(senhaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(jButton1)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,29 +164,39 @@ public class JFcadastroCliente extends javax.swing.JFrame {
         String email = emailField.getText();
         String senha = new String(senhaField.getPassword());
 
-        // Validar os campos antes de inserir no banco de dados
+        if (nome.isEmpty() || cpf.isEmpty() || cnh.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos antes do próximo passo.");
+        } else if (cpf.length() != 11 || cpf.length() != 14  && !cpf.matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "O CPF deve ter 11 ou 14 dígitos numéricos.");
+        } else if (cnh.length() != 11 || !cnh.matches("[0-9]+")) {
+            JOptionPane.showMessageDialog(this, "A CNH deve ter 11 dígitos numéricos.");
+        }else {
+            cpf = cpf.replaceAll("[^0-9]", "");
+            cnh = cnh.replaceAll("[^0-9]", "");
 
-        // Criar um objeto CadastrarCliente com as informações coletadas
-        CadastrarCliente cliente = new CadastrarCliente(nome, cpf, cnh, email, senha);
+            CadastrarCliente cliente = new CadastrarCliente(nome, cpf, cnh, email, senha);
 
-        // Chamar o método para inserir o cliente no banco de dados
-        CadastrarClienteMapping mapping = new CadastrarClienteMapping();
-        mapping.inserirCliente(nome, cpf, cnh, email, senha);
+            CClienteSL clienteSL = new CClienteSL();
+            clienteSL.inserirCliente(nome, cpf, cnh, email, senha);
 
-        // Limpar os campos após o cadastro
-        ClienteField.setText("");
-        CPField.setText("");
-        CNHField.setText("");
-        emailField.setText("");
-        senhaField.setText("");
+            ClienteField.setText("");
+            CPField.setText("");
+            CNHField.setText("");
+            emailField.setText("");
+            senhaField.setText("");
 
-        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso!");
+            JFsolicitarCarro FsolicitarCarro = new JFsolicitarCarro();
+            FsolicitarCarro.setVisible(true);
+        }
     }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        VerificaTable verificaTable = new VerificaTable();
+        verificaTable.CreateTable();
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -180,7 +219,6 @@ public class JFcadastroCliente extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFcadastroCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -195,6 +233,8 @@ public class JFcadastroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField ClienteField;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -11,9 +11,9 @@ public class CadastrarCliente {
     private String senha;
     //id do veiculo 
 
-    public CadastrarCliente(String nome1, String cpf1, String cnh1, String email1, String senha1) {}
+    public CadastrarCliente(String nome, String cpf, String cnh, String email, String senha) {}
 
-    public CadastrarCliente(int idCliente, String nome, String cpf, String cnh, String email, String senha) {
+    public CadastrarCliente(int idCliente) {
         this.idCliente = idCliente;
         this.nome = nome;
         this.cpf = cpf;
