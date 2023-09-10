@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GerarProtocolo {
 	
-	private String idProtocolo;
+	private int idProtocolo;
 	private Date dataAcionamento;
 	//private ArrayList<CadastrarCliente> itensProtocolo;
 	
@@ -13,17 +13,17 @@ public class GerarProtocolo {
 		
 	}
 
-	public GerarProtocolo(String idProtocolo, Date dataAcionamento, ArrayList<CadastrarCliente> itensProtocolo) {
+	public GerarProtocolo(int idProtocolo, Date dataAcionamento, ArrayList<CadastrarCliente> itensProtocolo) {
 		this.idProtocolo = idProtocolo;
 		this.dataAcionamento = dataAcionamento;
 		//this.itensProtocolo = itensProtocolo;
 	}
 
-	public String getIdProtocolo() {
+	public int getIdProtocolo() {
 		return idProtocolo;
 	}
 
-	public void setIdProtocolo(String idProtocolo) {
+	public void setIdProtocolo(int idProtocolo) {
 		this.idProtocolo = idProtocolo;
 	}
 
